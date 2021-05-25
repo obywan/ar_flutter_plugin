@@ -496,7 +496,7 @@ internal class AndroidARView(
                             .exceptionally { throwable ->
                                 // Pass error to session manager (this has to be done on the main thread if this activity)
                                 val mainHandler = Handler(viewContext.mainLooper)
-                                val runnable = Runnable {sessionManagerChannel.invokeMethod("onError", listOf("Unable to load renderable" +  dict_node["uri"] as String)) }
+                                val runnable = Runnable {sessionManagerChannel.invokeMethod("onError", listOf("Unable to load renderable: " +  dict_node["uri"] as String)) }
                                 mainHandler.post(runnable)
                                 completableFutureSuccess.completeExceptionally(throwable)
                                 null // return null because java expects void return (in java, void has no instance, whereas in Kotlin, this closure returns a Unit which has one instance)
